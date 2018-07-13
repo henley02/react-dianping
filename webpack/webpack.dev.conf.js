@@ -5,6 +5,7 @@ const baseWebpackConfig = require("./webpack.config");
 
 let config = merge(baseWebpackConfig, {
     mode: 'development',
+
     plugins: [
         /*设置热更新*/
         new webpack.HotModuleReplacementPlugin(),

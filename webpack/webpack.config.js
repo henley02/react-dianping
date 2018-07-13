@@ -6,8 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
-        'index': path.resolve(__dirname, '../src/component/index/app.js'),
-        'shop': path.resolve(__dirname, '../src/component/shop/app.js'),
+        'index': path.resolve(__dirname, '../src/app.js'),
     },
     resolve: {
         extensions: ['.js', '.json', '.jxs']
@@ -41,10 +40,36 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        //包清单
+        runtimeChunk: {
+            name: "manifest"
+        },
+        splitChunks: {
+            cacheGroups: {
+                //项目公共组件
+                common: {
+                    chunks: 'initial',
+                    name: 'common',
+                    minChunks: 2,
+                    maxInitialRequests: 5,
+                    minSize: 0
+                },
+                //第三方组件
+                vendor: {
+                    test: /node-modules/,
+                    chunks: "initial",
+                    name: "vendor",
+                    priority: 10,
+                    enforce: true,
+                }
+            }
+        }
+    },
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: "js/[name].bundle.js",
-        chunkFilename: "js/[name].chunk.js",
+        filename: "js/[name].bundle.[hash:8].js",
+        chunkFilename: "js/[name].chunk.[hash:8].js",
         publicPath: '',
     },
     plugins: [

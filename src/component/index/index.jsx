@@ -7,7 +7,7 @@ class Index extends React.Component {
         return (
             <div className="cont">
                 <div className="top">
-                    <div>这是头部</div>
+                    <div>这是首页头部</div>
                     <div>
                         <i className="logo"/>
                     </div>
