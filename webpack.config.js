@@ -6,7 +6,7 @@ const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
-        'index': path.resolve(__dirname, '../src/app.js'),
+        'index': path.resolve(__dirname, 'src/app.js'),
     },
     resolve: {
         extensions: ['.js', '.json', '.jxs']
@@ -54,6 +54,22 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        /*设置热更新*/
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextWebpackPlugin({
+            filename: 'css/[name].min.[hash:8].css',
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './index.html',
+            minify: {
+                collapseWhitespace: true //折叠空白区域 也就是压缩代码
+            },
+            hash: true
+        }),
+    ],
     optimization: {
         //包清单
         runtimeChunk: {
@@ -80,28 +96,29 @@ module.exports = {
             }
         }
     },
+
+    devServer: {
+        contentBase: path.resolve(__dirname, '../dist'),
+        host: 'localhost',
+        port: '9090',
+        compress: true,
+        hot: true,
+        inline: true,
+        historyApiFallback: true,
+        disableHostCheck: true,
+        proxy: [
+            {
+                context: ['/api/**', '/u/**'],
+                target: 'http://192.168.12.100:8080/',
+                secure: false
+            }
+        ],
+        open: true,//打开浏览器
+    },
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: "js/[name].bundle.[hash:8].js",
         chunkFilename: "js/[name].chunk.[hash:8].js",
         publicPath: '',
-    },
-    plugins: [
-        new CleanWebpackPlugin('dist/*.*', {
-            root: __dirname,
-            verbose: true,
-            dry: false
-        }),
-        new ExtractTextWebpackPlugin({
-            filename: '[name].min.[hash:8].css',
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.html',
-            minify: {
-                collapseWhitespace: true //折叠空白区域 也就是压缩代码
-            },
-            hash: true
-        }),
-    ]
+    }
 }

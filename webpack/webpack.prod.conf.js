@@ -10,4 +10,4 @@ let config = merge(baseWebpackConfig, {
     mode: 'production',
 })
 
-export default config;
+module.exports = config;
