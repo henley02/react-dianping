@@ -6,10 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --devtool eval --progress --colors --profile --config webpack/webpack.dev.conf.js",
-    "build": "SET BABEL_ENV=production && webpack --progress --colors --config webpack/webpack.prod.conf.js",
-
-    "p": "webpack --mode production  --progress --colors --profile --config webpack.config.js",
-    "pd": "webpack-dev-server --mode development --devtool eval --progress --colors --profile --config webpack.config.js"
+    "build": "SET BABEL_ENV=production && webpack --progress --colors --config webpack/webpack.prod.conf.js"
   },
   "keywords": [],
   "author": "",

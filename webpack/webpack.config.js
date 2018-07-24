@@ -37,6 +37,7 @@ module.exports = {
                             loader: 'postcss-loader'
                         }
                     ],
+                    publicPath: "../"
                 })
             },
             {
@@ -87,13 +88,9 @@ module.exports = {
         publicPath: '',
     },
     plugins: [
-        new CleanWebpackPlugin('dist/*.*', {
-            root: __dirname,
-            verbose: true,
-            dry: false
-        }),
+        new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
         new ExtractTextWebpackPlugin({
-            filename: '[name].min.[hash:8].css',
+            filename: 'css/[name].min.[hash:8].css',
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -102,6 +99,6 @@ module.exports = {
                 collapseWhitespace: true //折叠空白区域 也就是压缩代码
             },
             hash: true
-        }),
+        })
     ]
 }
