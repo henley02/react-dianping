@@ -1,62 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom';
 
-class A extends React.Component {
-    constructor() {
-        super();
-    }
+import Home from 'pages/home/index';
+import Layout from 'component/layout/index.jsx';
 
+class App extends React.Component {
     render() {
         return (
-            <div>
-                Component A
-                参数：{this.props.match.params.id}
-                <switch>
-                    <Route path={`${this.props.match.path}`/:id}/>
-                </switch>
-            </div>
+            <Router>
+                <Layout>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Redirect from="*" to="/"/>
+                    </Switch>
+                </Layout>
+            </Router>
         )
     }
 }
 
-class B extends React.Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <div>Component B </div>
-        )
-    }
-}
-
-class Wrapper extends React.Component {
-    constructor() {
-        super();
-    }
-
-    render() {
-        return (
-            <div>
-                <Link to="/a">组件A</Link>
-                <br/>
-                <Link to="/a/123">组件A</Link>
-                <br/>
-                <Link to="/b">组件B</Link>
-                <div>{this.props.children}</div>
-            </div>
-        )
-    }
-}
-
-ReactDOM.render(
-    <Router>
-        <Wrapper>
-            <Route path="/a" component={A}/>
-            <Route path="/b" component={B}/>
-        </Wrapper>
-    </Router>
-    , document.getElementById('app')
-);
+ReactDOM.render(<App/>, document.getElementById('app'));

@@ -9,7 +9,12 @@ module.exports = {
         'index': path.resolve(__dirname, '../src/app.js'),
     },
     resolve: {
-        extensions: ['.js', '.json', '.jxs']
+        extensions: ['.js', '.json', '.jxs', '.jsx'],
+        alias: {
+            component: path.resolve(__dirname, '../src/component'),
+            public: path.resolve(__dirname, '../src/public'),
+            pages: path.resolve(__dirname, '../src/pages'),
+        }
     },
     module: {
         rules: [
@@ -68,39 +73,55 @@ module.exports = {
                 ]
             }
         ]
-    },
+    }
+    ,
     optimization: {
         //包清单
         runtimeChunk: {
             name: "manifest"
-        },
+        }
+        ,
         splitChunks: {
             cacheGroups: {
                 //项目公共组件
                 common: {
                     chunks: 'initial',
-                    name: 'common',
-                    minChunks: 2,
-                    maxInitialRequests: 5,
-                    minSize: 0
-                },
+                    name:
+                        'common',
+                    minChunks:
+                        2,
+                    maxInitialRequests:
+                        5,
+                    minSize:
+                        0
+                }
+                ,
                 //第三方组件
                 vendor: {
                     test: /node-modules/,
-                    chunks: "initial",
-                    name: "vendor",
-                    priority: 10,
-                    enforce: true,
+                    chunks:
+                        "initial",
+                    name:
+                        "vendor",
+                    priority:
+                        10,
+                    enforce:
+                        true,
                 }
             }
         }
-    },
+    }
+    ,
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: "js/[name].bundle.[hash:8].js",
-        chunkFilename: "js/[name].chunk.[hash:8].js",
-        publicPath: '',
-    },
+        filename:
+            "js/[name].bundle.[hash:8].js",
+        chunkFilename:
+            "js/[name].chunk.[hash:8].js",
+        publicPath:
+            '',
+    }
+    ,
     plugins: [
         new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
         new ExtractTextWebpackPlugin({
