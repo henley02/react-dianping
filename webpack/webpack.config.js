@@ -133,7 +133,8 @@ module.exports = {
             minify: {
                 collapseWhitespace: true //折叠空白区域 也就是压缩代码
             },
-            hash: true
+            hash: true,
+            favicon: "./favicon.ico"
         })
     ]
 }
