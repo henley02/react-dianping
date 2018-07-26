@@ -114,12 +114,9 @@ module.exports = {
     ,
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename:
-            "js/[name].bundle.[hash:8].js",
-        chunkFilename:
-            "js/[name].chunk.[hash:8].js",
-        publicPath:
-            '',
+        filename: "js/[name].bundle.[hash:8].js",
+        chunkFilename: "js/[name].chunk.[hash:8].js",
+        publicPath: '',
     }
     ,
     plugins: [
