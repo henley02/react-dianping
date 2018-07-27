@@ -1,16 +1,21 @@
 import React from 'react';
 import "./index.sass";
 
-import axios from 'public/js/service';
 import {login} from 'api/index.js';
+import {getParamsCode, setLocalStorage} from 'public/js/util';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: 'admin',
-            password: '',
+            password: 'admin',
+            redirect: getParamsCode("redirect") || "/"
         }
+    }
+
+    componentWillMount() {
+        document.title = "登录 - " + document.title;
     }
 
     onInputChange(e) {
@@ -19,11 +24,17 @@ class Login extends React.Component {
         this.setState({
             [inputName]: inputValue
         })
-        console.log([inputName] + "  " + inputValue)
-        console.log(this.state);
     }
 
-    async onSubmit(e) {
+    async onSubmit() {
+        if (this.state.username.trim() == '') {
+            // "用户名不能为空"
+            return false;
+        }
+        if (this.state.password.trim() == '') {
+            // "密码不能为空"
+            return false;
+        }
         let res = await login({
             url: "/manage/user/login.do",
             data: {
@@ -33,9 +44,20 @@ class Login extends React.Component {
         });
         console.log(res);
         if (res.status === 0) {
-
+            setLocalStorage("userInfo", res.data);
+            this.props.history.push(this.state.redirect);
         } else {
 
+        }
+    }
+
+    onInputKeyUp(e) {
+        if (e.keyCode === 13) {
+            if (e.target.name === "username") {
+                document.getElementsByName("password")[0].focus();
+            } else {
+                this.onSubmit();
+            }
         }
     }
 
@@ -48,14 +70,18 @@ class Login extends React.Component {
                         <div>
                             <div className="form-group">
                                 <input type="text" className="form-control" placeholder="请输入用户名" name="username"
+                                       defaultValue={this.state.username}
+                                       onKeyUp={(event) => this.onInputKeyUp(event)}
                                        onChange={(event) => this.onInputChange(event)}/>
                             </div>
                             <div className="form-group">
                                 <input type="password" className="form-control" placeholder="请输入密码" name="password"
+                                       defaultValue={this.state.password}
+                                       onKeyUp={(event) => this.onInputKeyUp(event)}
                                        onChange={(event) => this.onInputChange(event)}/>
                             </div>
                             <button className="btn btn-lg btn-primary btn-block"
-                                    onClick={(e) => this.onSubmit(e)}>登陆
+                                    onClick={() => this.onSubmit()}>登陆
                             </button>
                         </div>
                     </div>
