@@ -14,6 +14,7 @@ module.exports = {
             component: path.resolve(__dirname, '../src/component'),
             public: path.resolve(__dirname, '../src/public'),
             pages: path.resolve(__dirname, '../src/pages'),
+            api: path.resolve(__dirname, '../src/api'),
         }
     },
     module: {

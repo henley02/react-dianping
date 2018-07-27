@@ -2,12 +2,13 @@ import React from 'react';
 import "./index.sass";
 
 import axios from 'public/js/service';
+import {login} from 'api/index.js';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '12312',
+            username: 'admin',
             password: '',
         }
     }
@@ -23,11 +24,18 @@ class Login extends React.Component {
     }
 
     async onSubmit(e) {
-        let res = await axios.post("/manage/user/login.do");
+        let res = await login({
+            url: "/manage/user/login.do",
+            data: {
+                username: this.state.username,
+                password: this.state.password
+            }
+        });
+        console.log(res);
         if (res.status === 0) {
 
         } else {
-            
+
         }
     }
 

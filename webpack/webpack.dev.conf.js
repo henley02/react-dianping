@@ -22,7 +22,7 @@ let config = merge(baseWebpackConfig, {
         proxy: [
             {
                 context: ['/manage/**'],
-                target: 'http://admintest.happymmall.com',
+                target: 'http://adminv2.happymmall.com/',
                 changeOrigin: true,
                 secure: false
             }
