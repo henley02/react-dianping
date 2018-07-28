@@ -8,6 +8,7 @@ import Home from 'pages/home/index';
 import Login from 'pages/login/index';
 import Layout from 'component/layout/index.jsx';
 import ErrorPage from 'pages/error/index';
+import UserList from 'pages/user/index';
 
 class App extends React.Component {
     render() {
@@ -22,7 +23,8 @@ class App extends React.Component {
                                 <Route path="/product" component={Home}/>
                                 <Route path="/product-category" component={Home}/>
                                 <Route path="/order" component={Home}/>
-                                <Route path="/user" component={Home}/>
+                                <Route page="/user/index" component={UserList}/>
+                                <Redirect exact from="/user" to="/user/index"/>
                                 <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>

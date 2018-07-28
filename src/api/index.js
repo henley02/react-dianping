@@ -12,4 +12,14 @@ export const login = params => axios.post('/manage/user/login.do', params);
  */
 export const logout = () => axios.post('/user/logout.do');
 
+/**
+ * 获取首页数据
+ */
 export const getHomeCount = () => axios.post("/manage/statistic/base_count.do");
+
+/**
+ * 获取用户列表数据
+ * @param params
+ * @constructor
+ */
+export const FetchUserList = (params) => axios.post("/manage/user/list.do", params);
