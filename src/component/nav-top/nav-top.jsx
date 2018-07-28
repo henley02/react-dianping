@@ -1,13 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {getLocalStorage, removeLocalStorage} from 'public/js/util';
+import {logout} from 'api/index'
 
 class NavTop extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userInfo: getLocalStorage("userInfo")
+        }
     }
 
-    logout() {
-        console.log("logout")
+    async logout() {
+        let res = await logout();
+        removeLocalStorage("userInfo");
+        window.location.href = "/login";
     }
 
     render() {
@@ -20,7 +27,7 @@ class NavTop extends React.Component {
                     <li className="dropdown">
                         <a className="dropdown-toggle" href="javascript:;">
                             <i className="fa fa-user fa-fw"></i>
-                            <span>欢迎，adminxxx</span>
+                            <span>欢迎，{this.state.userInfo.username}</span>
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">

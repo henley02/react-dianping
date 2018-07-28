@@ -21,7 +21,7 @@ let config = merge(baseWebpackConfig, {
         disableHostCheck: true,
         proxy: [
             {
-                context: ['/manage/**'],
+                context: ['/manage/**', "/user/**"],
                 target: 'http://adminv2.happymmall.com/',
                 changeOrigin: true,
                 secure: false

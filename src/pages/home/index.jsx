@@ -2,6 +2,7 @@ import React from 'react';
 import PageTitle from 'component/page-title/page-title';
 import {Link} from 'react-router-dom';
 import "./index.sass";
+import {getHomeCount} from 'api/index';
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,8 +14,15 @@ class Home extends React.Component {
         }
     }
 
-    init() {
-        getHomeCount()
+    componentWillMount() {
+        this.init();
+    }
+
+    async init() {
+        let res = await getHomeCount();
+        if (res.status === 0) {
+            this.setState(res.data);
+        }
     }
 
     render() {

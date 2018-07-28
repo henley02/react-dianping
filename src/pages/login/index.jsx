@@ -36,11 +36,8 @@ class Login extends React.Component {
             return false;
         }
         let res = await login({
-            url: "/manage/user/login.do",
-            data: {
-                username: this.state.username,
-                password: this.state.password
-            }
+            username: this.state.username,
+            password: this.state.password
         });
         console.log(res);
         if (res.status === 0) {

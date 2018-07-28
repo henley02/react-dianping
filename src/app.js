@@ -7,6 +7,7 @@ import "babel-polyfill";
 import Home from 'pages/home/index';
 import Login from 'pages/login/index';
 import Layout from 'component/layout/index.jsx';
+import ErrorPage from 'pages/error/index';
 
 class App extends React.Component {
     render() {
@@ -22,7 +23,7 @@ class App extends React.Component {
                                 <Route path="/product-category" component={Home}/>
                                 <Route path="/order" component={Home}/>
                                 <Route path="/user" component={Home}/>
-                                <Redirect from="*" to="/"/>
+                                <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>
                     )}/>
