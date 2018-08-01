@@ -23,3 +23,7 @@ export const getHomeCount = () => axios.post("/manage/statistic/base_count.do");
  * @constructor
  */
 export const FetchUserList = (params) => axios.post("/manage/user/list.do", params);
+
+export const FetchProductList = (params) => axios.post("/manage/product/list.do", params);
+
+export const ChangeProductStatus = (params) => axios.post("/manage/product/set_sale_status.do", params);
