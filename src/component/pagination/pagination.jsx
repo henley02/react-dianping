@@ -10,9 +10,7 @@ class Pagination extends React.Component {
     render() {
         return (
             <div className="row">
-                <RcPagination {...this.props} onChange={(pageNum) => {
-                    console.log(pageNum)
-                }} hideOnSinglePage showQuickJumper/>
+                <RcPagination {...this.props} hideOnSinglePage showQuickJumper/>
             </div>
         );
     }
