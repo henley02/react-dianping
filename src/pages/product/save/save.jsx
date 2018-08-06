@@ -1,8 +1,25 @@
 import React from 'react';
 import PageTitle from 'component/page-title/page-title';
 import CategorySelect from 'pages/product/components/category-select/category-select';
+import FileUploader from 'component/file-upload/file-upload';
 
 class save extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            categoryId: 0,
+            parentCategoryId: 0,
+        }
+    }
+
+    onCategoryChange(firstCategoryId, secondCategoryId) {
+        this.setState({
+            categoryId: secondCategoryId,
+            parentCategoryId: firstCategoryId
+        })
+        console.log(firstCategoryId, secondCategoryId);
+    }
+
     render() {
         return (
             <div id="page-wrapper">
@@ -22,7 +39,8 @@ class save extends React.Component {
                     </div>
                     <div className="form-group">
                         <label className="col-md-2 control-label">所属分类</label>
-                        <CategorySelect></CategorySelect>
+                        <CategorySelect
+                            onCategoryChange={(firstCategoryId, secondCategoryId) => this.onCategoryChange(firstCategoryId, secondCategoryId)}/>
                     </div>
                     <div className="form-group">
                         <label className="col-md-2 control-label">商品价格</label>
@@ -45,6 +63,7 @@ class save extends React.Component {
                     <div className="form-group">
                         <label className="col-md-2 control-label">商品图片</label>
                         <div className="col-md-10">
+                            <FileUploader></FileUploader>
                         </div>
                     </div>
                     <div className="form-group">

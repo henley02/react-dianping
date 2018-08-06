@@ -44,3 +44,10 @@ export const ChangeProductStatus = (params) => axios.post("/manage/product/set_s
  * @constructor
  */
 export const SearchProduct = (params) => axios.post("/manage/product/search.do", params);
+
+/**
+ * 获取分类
+ * @param params
+ * @constructor
+ */
+export const FetchCategory = (params) => axios.post("/manage/category/get_category.do", params);
