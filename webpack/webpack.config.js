@@ -27,7 +27,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(css|pcss|sass)$/,
+                test: /\.(css|pcss|sass|scss)$/,
                 use: ExtractTextWebpackPlugin.extract({
                     fallback: {
                         loader: 'style-loader'

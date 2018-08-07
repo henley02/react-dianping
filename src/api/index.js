@@ -51,3 +51,11 @@ export const SearchProduct = (params) => axios.post("/manage/product/search.do",
  * @constructor
  */
 export const FetchCategory = (params) => axios.post("/manage/category/get_category.do", params);
+
+/**
+ * 保存商品
+ * @param params
+ */
+export const saveProduct = (params) => axios.post("/manage/product/save.do", params);
+
+export const getProduct = (params) => axios.post("/manage/product/detail.do", params);
