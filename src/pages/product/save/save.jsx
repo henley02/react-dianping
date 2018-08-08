@@ -21,6 +21,7 @@ class save extends React.Component {
             price: '',
             stock: '',
             detail: '',
+            defaultDetail: '',
             status: 1,//商品状态：在售
         }
     }
@@ -35,6 +36,7 @@ class save extends React.Component {
             let res = await getProduct({productId: this.state.id});
             if (res.status === 0) {
                 let images = res.data.subImages.split(",");
+                res.data.defaultDetail = res.data.detail;
                 res.data.subImages = images.map((imageUri) => {
                     return {
                         url: res.data.imageHost + imageUri,
@@ -164,6 +166,9 @@ class save extends React.Component {
             status: this.state.status,
         };
         let result = this.checkProduct(product);
+        if (this.state.id) {
+            product.id = this.state.id;
+        }
         if (result.status) {
             let res = await saveProduct(product);
             if (res.status === 0) {
@@ -249,7 +254,7 @@ class save extends React.Component {
                     <div className="form-group">
                         <label className="col-md-2 control-label">商品详情</label>
                         <div className="col-md-10">
-                            <RichEditor detail={this.state.detail}
+                            <RichEditor detail={this.state.detail} defaultDetail={this.state.defaultDetail}
                                         onValueChange={(value) => this.onRichEditorChange(value)}/>
                         </div>
                     </div>

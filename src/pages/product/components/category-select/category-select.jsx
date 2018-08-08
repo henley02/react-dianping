@@ -29,14 +29,13 @@ class CategorySelect extends React.Component {
         if (nextProps.parentCategoryId === 0) {
             this.setState({
                 firstCategoryId: nextProps.parentCategoryId,
-                secondCategoryList: [],
                 secondCategoryId: 0,
             })
         } else {
             this.setState({
                 firstCategoryId: nextProps.parentCategoryId,
                 secondCategoryId: nextProps.categoryId,
-            }, () => this.loadSecondCategoryList(nextProps.categoryId))
+            }, () => parentCategoryIdChange && this.loadSecondCategoryList())
         }
     }
 
@@ -49,8 +48,8 @@ class CategorySelect extends React.Component {
         }
     }
 
-    async loadSecondCategoryList(val) {
-        let res = await FetchCategory({categoryId: val});
+    async loadSecondCategoryList() {
+        let res = await FetchCategory({categoryId: this.state.firstCategoryId});
         if (res.status === 0) {
             this.setState({
                 secondCategoryList: res.data
@@ -67,9 +66,6 @@ class CategorySelect extends React.Component {
         }, () => {
             this.onPropsCategoryChange();
         })
-        if (val !== 0) {
-            this.loadSecondCategoryList();
-        }
     }
 
     changeSecondCategoryId(e) {
