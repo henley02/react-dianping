@@ -58,4 +58,14 @@ export const FetchCategory = (params) => axios.post("/manage/category/get_catego
  */
 export const saveProduct = (params) => axios.post("/manage/product/save.do", params);
 
+/**
+ * 获取商品详情
+ * @param params
+ */
 export const getProduct = (params) => axios.post("/manage/product/detail.do", params);
+
+/**
+ * 修改品类的名称
+ * @param params
+ */
+export const updateCategory = (params) => axios.post("/manage/product/detail.do", params);

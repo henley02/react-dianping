@@ -12,7 +12,7 @@ class save extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.match.params.pid,
+            pid: this.props.match.params.pid,
             name: '',
             subtitle: '',
             categoryId: 0,
@@ -32,8 +32,8 @@ class save extends React.Component {
 
     async loadProduct() {
         //编辑
-        if (this.state.id) {
-            let res = await getProduct({productId: this.state.id});
+        if (this.state.pid) {
+            let res = await getProduct({productId: this.state.pid});
             if (res.status === 0) {
                 let images = res.data.subImages.split(",");
                 res.data.defaultDetail = res.data.detail;
@@ -166,8 +166,8 @@ class save extends React.Component {
             status: this.state.status,
         };
         let result = this.checkProduct(product);
-        if (this.state.id) {
-            product.id = this.state.id;
+        if (this.state.pid) {
+            product.id = this.state.pid;
         }
         if (result.status) {
             let res = await saveProduct(product);
@@ -184,7 +184,7 @@ class save extends React.Component {
     render() {
         return (
             <div id="page-wrapper">
-                <PageTitle title="添加商品"/>
+                <PageTitle title={this.state.pid ? '编辑商品' : '添加商品'}/>
                 <div className="form-horizontal">
                     <div className="form-group">
                         <label className="col-md-2 control-label">商品名称</label>
