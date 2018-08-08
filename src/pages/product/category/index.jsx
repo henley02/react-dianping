@@ -73,7 +73,7 @@ class Index extends React.Component {
                                     <a className="opear" onClick={(e) => this.onUpdateName(category.id, category.name)}>修改名称</a>
                                     {
                                         category.parentId === 0 ?
-                                            <Link to={`/product-category/index?categoryId=${category.id}`}>查看其子类</Link>
+                                            <Link to={`/product-category/index/${category.id}`}>查看其子类</Link>
                                             :
                                             ""
                                     }
