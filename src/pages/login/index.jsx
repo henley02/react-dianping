@@ -39,7 +39,6 @@ class Login extends React.Component {
             username: this.state.username,
             password: this.state.password
         });
-        console.log(res);
         if (res.status === 0) {
             setLocalStorage("userInfo", res.data);
             this.props.history.push(this.state.redirect);

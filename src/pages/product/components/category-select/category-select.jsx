@@ -86,6 +86,7 @@ class CategorySelect extends React.Component {
         return (
             <div className="col-md-5">
                 <select className="form-control category-select"
+                        disabled={this.props.readOnly}
                         value={this.state.firstCategoryId}
                         onChange={(e) => this.changeFirstCategoryId(e)}>
                     <option value="">请选择一级分类</option>
@@ -99,6 +100,7 @@ class CategorySelect extends React.Component {
                     this.state.secondCategoryList.length > 0
                         ?
                         <select className="form-control category-select "
+                                disabled={this.props.readOnly}
                                 value={this.state.secondCategoryId}
                                 onChange={(e) => this.changeSecondCategoryId(e)}>
                             <option value="">请选择二级分类</option>
